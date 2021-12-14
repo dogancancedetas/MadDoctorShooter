@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerAnimation playerAnimation;
+
+    private Vector3 tempPos;
+
     [SerializeField]
     private float moveSpeed = 3.5f;
     [SerializeField]
     private float minBoundX = -71, maxBoundX = 71, minBoundY = -3.3f, maxBoundY = 0;
     private float xAxis, yAxis;
 
-    private PlayerAnimation playerAnimation;
-
-    private Vector3 tempPos;
+    [SerializeField]
+    private float shootWaitTime = 0.5f;
+    [SerializeField]
+    private float moveWaitTime = 0.3f;
+    private float waitBeforeShooting, waitBeforeMoving;
+    private bool canMove = true;
 
     private void Awake()
     {
@@ -25,12 +32,18 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleAnimation();
         HandleFacingDirection();
+
+        HandleShooting();
+        CheckIfCanMove();
     }
 
     void HandleMovement()
     {
         xAxis = Input.GetAxisRaw(TagManager.HORIZONTAL_AXIS);
         yAxis = Input.GetAxisRaw(TagManager.VERTICAL_AXIS);
+
+        if (!canMove)
+            return;
 
         tempPos = transform.position;
 
@@ -54,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimation()
     {
+        if (!canMove)
+            return;
+
         if (Mathf.Abs(xAxis) > 0 || Mathf.Abs(yAxis) > 0)
             playerAnimation.PlayAnimation(TagManager.WALK_ANIMATION_NAME);
         else
@@ -66,5 +82,33 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetFacingDirection(true);
         else if (xAxis < 0)
             playerAnimation.SetFacingDirection(false);
+    }
+
+    void StopMovement()
+    {
+        canMove = false;
+        waitBeforeMoving = Time.time + moveWaitTime;
+    }
+
+    void Shoot()
+    {
+        waitBeforeShooting = Time.time + shootWaitTime;
+        StopMovement();
+        playerAnimation.PlayAnimation(TagManager.SHOOT_ANIMATION_NAME);
+    }
+
+    void CheckIfCanMove()
+    {
+        if (Time.time > waitBeforeMoving)
+            canMove = true;
+    }
+
+    void HandleShooting()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time > waitBeforeShooting)
+                Shoot();
+        }
     }
 }
