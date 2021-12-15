@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Enemy
+  - GameplayCanvas
   layers:
   - Default
   - TransparentFX
@@ -11,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -40,4 +43,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3762383499
+    locked: 0
+  - name: Bullet
+    uniqueID: 3750841565
+    locked: 0
+  - name: Enemy
+    uniqueID: 1165256801
+    locked: 0
+  - name: Player
+    uniqueID: 843935685
+    locked: 0
+  - name: UI
+    uniqueID: 870013411
     locked: 0

@@ -37,6 +37,8 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag(TagManager.ENEMY_TAG))
         {
             //deal damage
+            collision.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+            Destroy(gameObject);
         }
     }
 }
