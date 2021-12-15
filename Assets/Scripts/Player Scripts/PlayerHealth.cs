@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
         {
             //inform that player has died
             playerMovement.PlayerDied();
+
+            GameplayController.instance.RestartGame();
         }
 
         playerHealthSlider.value = health;

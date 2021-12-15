@@ -15,5 +15,7 @@ public class PlayerShootingManager : MonoBehaviour
 
         if (facingDirection < 0)
             newBullet.GetComponent<Bullet>().SetNegativeSpeed();
+
+        SoundManager.instance.PlayShootSound();
     }
 }
