@@ -12,7 +12,6 @@ public class EnemyDamageArea : MonoBehaviour
     private LayerMask playerLayer;
 
     private bool canDealDamage;
-
     [SerializeField]
     private float damageAmount = 5;
 
@@ -32,10 +31,12 @@ public class EnemyDamageArea : MonoBehaviour
             if (canDealDamage)
             {
                 canDealDamage = false;
+
                 //deal damage to player
                 playerHealth.TakeDamage(damageAmount);
             }
         }
+
         DeactivateDamageArea();
     }
 

@@ -14,7 +14,6 @@ public class EnemySpawner : MonoBehaviour
     private int enemySpawnLimit = 10;
     [SerializeField]
     private List<GameObject> spawnedEnemies = new List<GameObject>();
-
     [SerializeField]
     private float minSpawnTime = 2, maxSpawnTime = 5;
 

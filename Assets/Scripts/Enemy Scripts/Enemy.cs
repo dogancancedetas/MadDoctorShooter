@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float attackWaitTime = 2.5f;
     private float attackTimer;
-
     [SerializeField]
     private float attackFinishedWaitTime = 0.5f;
     private float attackFinishedTimer;
